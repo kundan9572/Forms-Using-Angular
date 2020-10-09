@@ -1,0 +1,11 @@
+<form [formGroup] = "personForm" (ngSubmit)= "onSubmit()" class="form">
+    <div>
+        <label>Hobbies</label>
+        <div class="flex-container">
+            <div *ngFor= "let hobby of personForm.controls.hobbies.controls; let i=index;">
+                <input type="checkbox" [formControl] = "hobby">
+                {{ myHobbies[i].name }}
+            </div>
+        </div>
+    </div>
+</form>

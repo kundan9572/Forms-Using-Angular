@@ -1,0 +1,51 @@
+<h1>Fill the form :</h1>
+<div class="container align column">
+  <form #personForm="ngForm" (ngSubmit)="submitForm(personForm)" novalidate>
+    <div class="element">
+      <div class="mandatory" [ngClass]="{'inValid': personForm.submitted && firstName.invalid }">
+        <label>
+          Enter First Name:
+        </label>
+        <input type="text" [(ngModel)]="person.firstName" required pattern="[A-Za-Z]*" #firstName="ngModel"
+          name="fName" />
+      </div>
+      <div *ngIf="personForm.submitted && firstName.invalid" class="m-t-10 error-message">
+        <div *ngIf="firstName.errors.required">
+          First Name is required.
+        </div>
+        <div *ngIf=" firstName.errors.pattern">
+          Invalid value for first name.
+        </div>
+      </div>
+    </div>
+
+    <div class="element">
+      <div class="mandatory" [ngClass]="{'inValid': personForm.submitted && lastName.invalid }">
+        <label>
+          Enter Last Name:
+        </label>
+        <input type="text" [(ngModel)]="person.lastName" required pattern="[A-Za-Z]*" #lastName="ngModel"
+          name="lName" />
+      </div>
+      <div *ngIf="personForm.submitted && lastName.invalid" class="m-t-10 error-message">
+        <div *ngIf="lastName.errors.required">
+          Last Name is required.
+        </div>
+        <div *ngIf=" lastName.errors.pattern">
+          Invakid value for Last name.
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <button type="submit" class="btn-solid">Submit</button>
+      <button type="button" (click)="clearForm(personForm)"> Reset</button>
+    </div>
+
+    <div *ngIf="personForm.submitted && personForm.valid">
+      <p>First Name: {{ person.firstName }}</p>
+      <p>Last Name: {{ person.lastName }}</p>
+    </div>
+
+  </form>
+</div>
